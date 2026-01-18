@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerCompass AI Pro - Tương Lai Trong Tầm Tay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette màu mới: Trẻ trung nhưng sang trọng */
+            --bg-dark: #0a0a1a;
+            --glass-white: rgba(255, 255, 255, 0.08);
+            --neon-blue: #00f2ff;
+            --neon-purple: #a200ff;
+            --neon-pink: #ff007a;
+            --soft-white: #f0f0f5;
+            --grad-main: linear-gradient(135deg, #00f2ff 0%, #a200ff 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--soft-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Nền sáng lên nhẹ nhàng, sang trọng */
+        body::before {
+            content: ''; position: fixed; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(162, 0, 255, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Hiệu ứng hiện ra từ từ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 26, 0.7); backdrop-filter: blur(20px);
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; background: var(--grad-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative; padding: 0 10%;
+        }
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff 50%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-content p { font-size: 1.2rem; color: #b0b0c0; max-width: 700px; margin: 0 auto 30px; }
+
+        .btn-neon {
+            padding: 15px 40px; background: var(--grad-main); border: none; color: white;
+            font-weight: 700; border-radius: 50px; cursor: pointer; transition: 0.4s;
+            text-transform: uppercase; letter-spacing: 1px; display: inline-block;
+            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+        }
+        .btn-neon:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0, 242, 255, 0.4); }
+
+        /* --- GALLERY & ROADMAP --- */
+        .welcome-img-container { width: 100%; padding: 50px 10%; text-align: center; }
+        .welcome-img {
+            width: 100%; max-width: 1100px; border-radius: 40px; 
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .roadmap-container { position: relative; padding: 100px 10%; display: flex; flex-direction: column; gap: 100px; }
+        
+        /* Đường uốn lượn sang trọng hơn */
+        .roadmap-path {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 90%; background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            z-index: -1; opacity: 0.2; border-radius: 10px;
+        }
+
+        .roadmap-item { display: flex; align-items: center; width: 100%; }
+        .roadmap-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .roadmap-img {
+            width: 45%; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+        }
+        .roadmap-img:hover { transform: scale(1.05) rotate(2deg); border-color: var(--neon-blue); }
+
+        .roadmap-info { width: 55%; padding: 0 60px; }
+        .roadmap-info h3 { color: var(--neon-blue); font-size: 2.2rem; margin-bottom: 15px; font-weight: 800; }
+        .roadmap-info p { font-size: 1.1rem; line-height: 1.7; color: #b0b0c0; }
+
+        .video-final {
+            width: 100%; max-width: 900px; margin: 80px auto;
+            border-radius: 40px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        /* --- AI SECTION --- */
+        .ai-section { min-height: 100vh; padding: 120px 5%; display: flex; flex-direction: column; align-items: center; }
+        .ai-card {
+            width: 100%; max-width: 950px; background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px; padding: 60px; backdrop-filter: blur(30px); position: relative;
+        }
+        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 20px; margin-bottom: 50px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background: var(--grad-main); transition: 0.6s ease; }
+
+        .opt-btn {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); 
+            padding: 30px; border-radius: 20px; color: #fff; cursor: pointer; transition: 0.3s;
+            font-size: 1.1rem; font-weight: 500; text-align: left;
+        }
+        .opt-btn:hover { background: var(--glass-white); border-color: var(--neon-blue); transform: translateY(-5px); }
+
+        .job-tag { background: var(--glass-white); padding: 8px 18px; border-radius: 30px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .job-tag:hover { background: var(--neon-blue); color: #000; }
+
+        @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .floating { animation: floating 4s infinite ease-in-out; }
+
+        @media (max-width: 768px) {
+            .roadmap-item, .roadmap-item:nth-child(even) { flex-direction: column; text-align: center; }
+            .roadmap-img { width: 100%; }
+            .roadmap-info { width: 100%; padding: 30px 0; }
+            .roadmap-path { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">CAREER COMPASS AI</div>
+        <a href="#ai-start" class="btn-neon" style="padding: 10px 25px; font-size: 0.8rem;">Bắt đầu TEST</a>
+    </nav>
+
+    <section class="hero reveal">
+        <div class="hero-content">
+            <h1 class="floating">Tương Lai Rực Rỡ <br> Khởi Đầu Tại Đây</h1>
+            <p>Sử dụng AI tiên tiến nhất để khám phá con đường sự nghiệp độc bản của riêng bạn.</p>
+            <a href="#ai-start" class="btn-neon">Khám phá ngay</a>
+        </div>
+    </section>
+
+    <div class="welcome-img-container reveal">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80" alt="Welcome" class="welcome-img">
+    </div>
+
+    <section class="roadmap-container">
+        <div class="roadmap-path"></div>
+
+        <div class="roadmap-item reveal">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" class="roadmap-img">
+            <div class="roadmap-info">
+                <h3>01. Khát vọng & Ý tưởng</h3>
+                <p>Mọi hành trình vĩ đại đều bắt đầu từ một câu hỏi: "Tôi là ai trong tương lai?". Chúng tôi ở đây để cùng bạn tìm câu trả lời.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item reveal">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" class="roadmap-img">
+            <div class="roadmap-info">
+                <h3>02. Phân tích Thông minh</h3>
+                <p>Không chỉ là trắc nghiệm, đó là sự kết hợp giữa tâm lý học và thuật toán AI để thấu hiểu sâu sắc tiềm năng của bạn.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item reveal">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" class="roadmap-img">
+            <div class="roadmap-info">
+                <h3>03. Kết nối Chuyên gia</h3>
+                <p>Những kiến thức thực chiến từ 100+ chuyên gia đầu ngành được tích hợp để mang lại lời khuyên thực tế nhất.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item reveal">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" class="roadmap-img">
+            <div class="roadmap-info">
+                <h3>04. Trải nghiệm Thực tế</h3>
+                <p>Hệ thống gợi ý lộ trình học tập và làm việc cụ thể cho từng năm, giúp bạn đi đúng hướng ngay từ hôm nay.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item reveal">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" class="roadmap-img">
+            <div class="roadmap-info">
+                <h3>05. Về đích Rực rỡ</h3>
+                <p>Tự tin nắm giữ chiếc chìa khóa tương lai. Career Compass AI là người bạn đồng hành trung thành của bạn.</p>
+            </div>
+        </div>
+
+        <div class="video-final reveal">
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/zhN-l-8X86g" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section class="ai-section" id="ai-start">
+        <div class="ai-card reveal">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 40px; font-weight: 800;">AI Analysis Engine</h2>
+            <div class="progress-bar"><div class="progress-fill" id="p-fill"></div></div>
+            <div id="quiz-body"></div>
+
+            <div class="result-box" id="result-body">
+                <i class="fas fa-brain" style="font-size: 4rem; color: var(--neon-blue); margin-bottom: 20px;"></i>
+                <div style="font-size: 1.2rem; margin-bottom: 10px; opacity: 0.8;">Kết quả phù hợp nhất:</div>
+                <div class="result-main-job" id="main-job"></div>
+                <div style="font-size: 1.8rem; color: var(--neon-pink); font-weight: 700; margin-bottom: 15px;" id="score-val">98.5% MATCH</div>
+                <p id="job-desc" style="color: #b0b0c0; margin-bottom: 40px; font-size: 1.1rem;"></p>
+                <div style="text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                    <p style="font-weight: 600; margin-bottom: 15px;">Các gợi ý tiềm năng khác:</p>
+                    <div class="other-jobs" id="others" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+                </div>
+                <br><br>
+                <button class="btn-neon" onclick="location.reload()">Làm lại bài test</button>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2);">
+        <p style="opacity: 0.6;">&copy; 2026 KNS Career Project - Built with Gemini AI Intelligence</p>
+    </footer>
+
+    <script>
+        // Hiệu ứng Fade-in khi Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal); // Hiện phần đầu khi load trang
+
+        // DỮ LIỆU CÂU HỎI (Giữ nguyên)
+        const questions = [
+            { q: "Khi giải quyết một vấn đề phức tạp, bạn chọn cách nào?", o: ["Phân tích dữ liệu và số liệu", "Vẽ sơ đồ tư duy sáng tạo", "Thảo luận cùng mọi người", "Lập kế hoạch phân công"], s: [ [5,0,0,0], [0,5,0,0], [0,0,5,0], [0,0,0,5] ] },
+            { q: "Bạn thích dành thời gian rảnh để làm gì?", o: ["Chơi các trò chơi trí tuệ", "Vẽ, viết lách hoặc thiết kế", "Đi tình nguyện, gặp gỡ bạn mới", "Đọc sách về quản trị, kinh doanh"], s: [ [5,0,0,0], [0,5,0,0], [0,0,5,0], [0,0,0,5] ] },
+            { q: "Trong một dự án nhóm, vai trò của bạn là?", o: ["Người kiểm tra tính logic", "Người đưa ra các ý tưởng điên rồ", "Người hòa giải và kết nối", "Người điều phối tiến độ"], s: [ [4,0,0,0], [0,5,0,0], [0,0,4,0], [1,0,0,5] ] },
+            { q: "Môi trường làm việc lý tưởng của bạn là?", o: ["Phòng Lab hoặc văn phòng yên tĩnh", "Studio đầy màu sắc", "Nơi đông đúc, náo nhiệt", "Tòa nhà cao tầng hiện đại"], s: [ [5,0,0,1], [0,5,1,0], [0,1,5,0], [1,0,0,5] ] },
+            { q: "Điều gì khiến bạn cảm thấy tự hào nhất?", o: ["Tìm ra lỗi sai mà người khác không thấy", "Tạo ra một sản phẩm đẹp mắt", "Giúp ai đó thay đổi cuộc sống", "Hoàn thành mục tiêu trước thời hạn"], s: [ [5,0,0,0], [0,5,0,0], [0,0,5,0], [0,0,0,5] ] },
+            { q: "Cách bạn đối mặt với thử thách?", o: ["Bình tĩnh tìm nguyên nhân gốc rễ", "Thử nghiệm nhiều cách mới lạ", "Tìm sự hỗ trợ từ mạng lưới quan hệ", "Nghiên cứu chiến lược của người thành công"], s: [ [5,0,0,0], [0,4,0,0], [0,0,3,0], [1,0,0,5] ] },
+            { q: "Bạn hứng thú với lĩnh vực nào nhất?", o: ["Công nghệ & Vũ trụ", "Phim ảnh & Thời trang", "Tâm lý & Giáo dục", "Đầu tư & Thị trường"], s: [ [5,1,0,0], [0,5,1,0], [0,1,5,0], [1,0,0,5] ] }
+        ];
+
+        // ====== BỔ SUNG 100 NGHỀ NGHIỆP ======
+        const jobDictionary = [
+            // ====== PHẦN BAN ĐẦU (GIỮ NGUYÊN) ======
+            { name: "Kỹ sư AI & Machine Learning", score: [10, 5, 0, 2], desc: "Bạn là người kiến tạo tương lai số với tư duy logic cực cao." },
+            { name: "Đạo diễn sáng tạo (Creative Director)", score: [2, 10, 3, 5], desc: "Người dẫn dắt linh hồn của các chiến dịch nghệ thuật và thương hiệu." },
+            { name: "Bác sĩ tâm lý", score: [3, 2, 10, 2], desc: "Người thấu cảm và hỗ trợ cộng đồng vượt qua rào cản tâm hồn." },
+            { name: "Giám đốc điều hành (CEO)", score: [5, 4, 5, 10], desc: "Nhà lãnh đạo kiệt xuất với khả năng bao quát và chiến lược tài ba." },
+            { name: "Nhà khoa học dữ liệu", score: [10, 2, 1, 3], desc: "Người biến những con số khô khan thành vàng đen cho doanh nghiệp." },
+            { name: "Kiến trúc sư", score: [7, 8, 2, 4], desc: "Sự kết hợp hoàn hảo giữa kỹ thuật chính xác và nghệ thuật không gian." },
+            { name: "Chuyên gia Marketing quốc tế", score: [3, 7, 6, 6], desc: "Người truyền cảm hứng và kết nối thương hiệu toàn cầu." },
+            { name: "Luật sư", score: [8, 2, 6, 5], desc: "Người bảo vệ công lý với khả năng tranh luận sắc bén." },
+            { name: "UX/UI Designer", score: [5, 9, 4, 2], desc: "Tạo ra những trải nghiệm mượt mà nhất trên không gian số." },
+            { name: "Chuyên gia đầu tư mạo hiểm", score: [7, 3, 4, 9], desc: "Nhạy bén với cơ hội và quản trị rủi ro đỉnh cao." },
+            { name: "Content Creator / Youtuber", score: [2, 10, 8, 4], desc: "Người tạo ra xu hướng và ảnh hưởng đến hàng triệu người." },
+            { name: "Kỹ sư Robot", score: [9, 6, 1, 4], desc: "Chế tạo những cỗ máy thay đổi thế giới." },
+            { name: "Nhà ngoại giao", score: [4, 3, 10, 7], desc: "Xây dựng những cầu nối hòa bình và hợp tác quốc tế." },
+
+            // ====== 100 NGHỀ BỔ SUNG ======
+            { name: "Lập trình viên Full-stack", score: [9, 5, 2, 3], desc: "Người xây dựng hệ thống hoàn chỉnh từ backend đến frontend." },
+            { name: "Game Designer", score: [6, 9, 4, 3], desc: "Người tạo nên thế giới ảo đầy cảm xúc và thử thách." },
+            { name: "Nhà phân tích tài chính", score: [9, 2, 3, 5], desc: "Chuyên gia đọc vị dòng tiền và thị trường." },
+            { name: "Chuyên viên nhân sự", score: [4, 3, 8, 5], desc: "Người quản trị con người và văn hóa doanh nghiệp." },
+            { name: "Nhà báo", score: [5, 6, 9, 4], desc: "Người truyền tải sự thật và góc nhìn xã hội." },
+            { name: "Biên kịch", score: [4, 10, 3, 3], desc: "Người thổi hồn cho những câu chuyện điện ảnh." },
+            { name: "Nhà nghiên cứu khoa học", score: [10, 3, 1, 2], desc: "Khám phá quy luật ẩn giấu của tự nhiên." },
+            { name: "Giáo viên", score: [5, 4, 9, 5], desc: "Người gieo mầm tri thức cho thế hệ tương lai." },
+            { name: "Giảng viên đại học", score: [7, 4, 8, 6], desc: "Người truyền đạt tri thức chuyên sâu và nghiên cứu." },
+            { name: "Kỹ sư xây dựng", score: [8, 3, 2, 4], desc: "Xây nên nền móng vững chắc cho xã hội." },
+
+            { name: "Kỹ sư điện – điện tử", score: [9, 4, 1, 3], desc: "Làm chủ dòng điện và hệ thống thông minh." },
+            { name: "Kỹ sư cơ khí", score: [8, 4, 1, 3], desc: "Thiết kế và vận hành các hệ thống cơ học." },
+            { name: "Nhà thiết kế đồ họa", score: [4, 10, 3, 2], desc: "Người biến ý tưởng thành hình ảnh trực quan." },
+            { name: "Nhiếp ảnh gia", score: [3, 9, 4, 2], desc: "Bắt trọn khoảnh khắc và cảm xúc bằng hình ảnh." },
+            { name: "Quản lý dự án", score: [6, 4, 6, 8], desc: "Người điều phối tiến độ và nguồn lực." },
+            { name: "Product Manager", score: [6, 5, 6, 8], desc: "Người định hướng sản phẩm từ ý tưởng đến thị trường." },
+            { name: "Tester phần mềm (QA)", score: [8, 3, 2, 2], desc: "Người đảm bảo chất lượng cho sản phẩm số." },
+            { name: "Chuyên gia an ninh mạng", score: [10, 2, 1, 3], desc: "Người bảo vệ hệ thống trước các cuộc tấn công." },
+            { name: "Kỹ sư DevOps", score: [9, 4, 2, 4], desc: "Cầu nối giữa phát triển và vận hành hệ thống." },
+            { name: "Data Engineer", score: [10, 3, 1, 3], desc: "Xây dựng hạ tầng dữ liệu quy mô lớn." },
+
+            { name: "Nhà phân tích kinh doanh", score: [7, 3, 5, 6], desc: "Người kết nối dữ liệu với chiến lược." },
+            { name: "Startup Founder", score: [6, 6, 5, 10], desc: "Người dám nghĩ lớn và tạo ra giá trị mới." },
+            { name: "Nhà kinh tế học", score: [9, 2, 4, 4], desc: "Phân tích và dự báo xu hướng kinh tế." },
+            { name: "Nhà xã hội học", score: [4, 3, 10, 3], desc: "Nghiên cứu hành vi và cấu trúc xã hội." },
+            { name: "Nhà nhân học", score: [4, 3, 9, 2], desc: "Khám phá văn hóa và con người." },
+            { name: "Chuyên viên truyền thông", score: [3, 7, 8, 5], desc: "Kết nối thông tin với công chúng." },
+            { name: "PR Manager", score: [4, 6, 8, 7], desc: "Người xây dựng hình ảnh thương hiệu." },
+            { name: "Brand Manager", score: [5, 7, 6, 7], desc: "Định vị thương hiệu trong tâm trí khách hàng." },
+            { name: "Sales Manager", score: [4, 4, 7, 8], desc: "Người dẫn dắt đội ngũ bán hàng." },
+            { name: "Chuyên viên tư vấn", score: [6, 4, 7, 6], desc: "Giải quyết vấn đề cho doanh nghiệp." },
+
+            { name: "Nhà phân tích thị trường", score: [7, 3, 5, 4], desc: "Đọc vị hành vi và xu hướng tiêu dùng." },
+            { name: "Nhà thiết kế nội thất", score: [4, 9, 3, 3], desc: "Biến không gian thành nơi sống lý tưởng." },
+            { name: "Nhà thiết kế thời trang", score: [3, 10, 3, 4], desc: "Người tạo xu hướng và phong cách." },
+            { name: "Stylist", score: [2, 9, 4, 3], desc: "Tạo dựng hình ảnh cá nhân ấn tượng." },
+            { name: "Makeup Artist", score: [2, 9, 5, 3], desc: "Tôn vinh vẻ đẹp bằng nghệ thuật trang điểm." },
+            { name: "Chuyên gia thẩm mỹ", score: [4, 6, 6, 4], desc: "Mang lại sự tự tin cho khách hàng." },
+            { name: "Bác sĩ đa khoa", score: [8, 2, 8, 4], desc: "Chăm sóc sức khỏe cộng đồng." },
+            { name: "Bác sĩ phẫu thuật", score: [9, 2, 6, 5], desc: "Đòi hỏi độ chính xác và bản lĩnh cao." },
+            { name: "Dược sĩ", score: [8, 3, 5, 3], desc: "Chuyên gia về thuốc và điều trị." },
+            { name: "Điều dưỡng", score: [4, 2, 9, 3], desc: "Người chăm sóc tận tâm cho bệnh nhân." },
+
+            { name: "Chuyên gia dinh dưỡng", score: [6, 3, 7, 3], desc: "Tối ưu sức khỏe qua chế độ ăn." },
+            { name: "Huấn luyện viên thể hình", score: [4, 4, 7, 5], desc: "Giúp người khác đạt thể trạng tốt nhất." },
+            { name: "Vận động viên chuyên nghiệp", score: [3, 5, 6, 6], desc: "Theo đuổi đỉnh cao thể thao." },
+            { name: "HLV thể thao", score: [4, 4, 7, 8], desc: "Người dẫn dắt đội nhóm đến chiến thắng." },
+            { name: "Trọng tài thể thao", score: [6, 2, 6, 4], desc: "Người giữ sự công bằng trên sân đấu." },
+            { name: "MC / Host", score: [3, 7, 9, 5], desc: "Kết nối khán giả bằng ngôn từ." },
+            { name: "Diễn viên", score: [2, 9, 7, 4], desc: "Hóa thân vào nhiều số phận khác nhau." },
+            { name: "Ca sĩ", score: [2, 9, 6, 4], desc: "Chạm đến cảm xúc bằng âm nhạc." },
+            { name: "Nhạc sĩ", score: [3, 10, 4, 3], desc: "Sáng tác giai điệu cho cuộc sống." },
+            { name: "Producer âm nhạc", score: [5, 8, 4, 5], desc: "Người đứng sau các sản phẩm âm nhạc." },
+
+            { name: "Kỹ thuật viên âm thanh", score: [7, 6, 2, 3], desc: "Đảm bảo chất lượng âm thanh hoàn hảo." },
+            { name: "Kỹ thuật viên ánh sáng", score: [6, 6, 2, 3], desc: "Tạo hiệu ứng thị giác sân khấu." },
+            { name: "Nhà tổ chức sự kiện", score: [5, 5, 8, 7], desc: "Điều phối những trải nghiệm đáng nhớ." },
+            { name: "Wedding Planner", score: [4, 6, 8, 6], desc: "Người tạo nên ngày trọng đại hoàn hảo." },
+            { name: "Hướng dẫn viên du lịch", score: [4, 5, 9, 4], desc: "Kết nối văn hóa và con người." },
+            { name: "Quản lý khách sạn", score: [5, 4, 7, 7], desc: "Đảm bảo trải nghiệm dịch vụ cao cấp." },
+            { name: "Quản lý nhà hàng", score: [5, 4, 7, 7], desc: "Điều hành dịch vụ ẩm thực." },
+            { name: "Đầu bếp", score: [4, 8, 4, 4], desc: "Sáng tạo nghệ thuật bằng hương vị." },
+            { name: "Bartender", score: [3, 7, 6, 3], desc: "Nghệ sĩ pha chế đồ uống." },
+            { name: "Barista", score: [3, 6, 6, 3], desc: "Thổi hồn vào từng ly cà phê." }
+        ];
+
+
+        let currentQ = 0;
+        let userStats = [0, 0, 0, 0];
+
+        function renderQuestion() {
+            if (currentQ >= questions.length) { showResult(); return; }
+            const q = questions[currentQ];
+            document.getElementById('p-fill').style.width = (currentQ / questions.length * 100) + "%";
+            document.getElementById('quiz-body').innerHTML = `
+                <div class="question-box" style="animation: fadeIn 0.5s ease;">
+                    <p style="font-size: 1.6rem; font-weight: 600; margin-bottom: 30px; line-height: 1.4;">${q.q}</p>
+                    <div class="options-grid" style="display: grid; gap: 15px;">
+                        ${q.o.map((opt, i) => `<button class="opt-btn" onclick="answer(${i})">${opt}</button>`).join('')}
+                    </div>
+                </div>`;
+        }
+
+        function answer(idx) {
+            questions[currentQ].s[idx].forEach((s, i) => userStats[i] += s);
+            currentQ++; renderQuestion();
+        }
+
+        function showResult() {
+            document.getElementById('quiz-body').style.display = 'none';
+            document.getElementById('p-fill').style.width = "100%";
+            let bestMatch = jobDictionary[0]; let minDistance = Infinity;
+            jobDictionary.forEach(job => {
+                let dist = 0; job.score.forEach((s, i) => dist += Math.pow(userStats[i] - s, 2));
+                if(dist < minDistance) { minDistance = dist; bestMatch = job; }
+            });
+            document.getElementById('result-body').style.display = 'block';
+            document.getElementById('main-job').innerText = bestMatch.name;
+            document.getElementById('job-desc').innerText = bestMatch.desc;
+            const others = jobDictionary.filter(j => j.name !== bestMatch.name).sort(() => 0.5 - Math.random()).slice(0, 6);
+            document.getElementById('others').innerHTML = others.map(j => `<span class="job-tag">${j.name}</span>`).join('');
+        }
+        renderQuestion();
+    </script>
+</body>
+</html>
