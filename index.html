@@ -248,19 +248,34 @@
             </div>
             <div class="team-grid">
                 <div class="member-card">
-                    <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=0D8ABC&color=fff" class="member-img" alt="Member 1">
-                    <h3>Nguyễn Văn A</h3>
+                    <img src="https://ui-avatars.com/api/?name=Tran+Nguyen+Anh+Linh&background=0D8ABC&color=fff" class="member-img" alt="Member 1">
+                    <h3>Trần Nguyễn Ánh Linh</h3>
                     <p style="color: var(--primary); font-weight: 600;">Trưởng nhóm</p>
                 </div>
                 <div class="member-card">
-                    <img src="https://ui-avatars.com/api/?name=Tran+Thi+B&background=43a047&color=fff" class="member-img" alt="Member 2">
-                    <h3>Trần Thị B</h3>
-                    <p style="color: var(--secondary); font-weight: 600;">Thiết kế & UI/UX</p>
+                    <img src="https://ui-avatars.com/api/?name=Pham+Ngoc+Tai+Anh&background=43a047&color=fff" class="member-img" alt="Member 2">
+                    <h3>Phạm Ngọc Tài Anh</h3>
+                    <p style="color: var(--third); font-weight: 600;">Thiết kế & UI/UX và Lập trình viên</p>
                 </div>
                 <div class="member-card">
-                    <img src="https://ui-avatars.com/api/?name=Le+Van+C&background=ffb300&color=fff" class="member-img" alt="Member 3">
-                    <h3>Lê Văn C</h3>
-                    <p style="color: var(--accent); font-weight: 600;">Lập trình viên</p>
+                    <img src="https://ui-avatars.com/api/?name=Trieu+Do+An+Nguyen&background=ffb300&color=fff" class="member-img" alt="Member 4">
+                    <h3>Triệu Đỗ An Nguyên</h3>
+                    <p style="color: var(--third); font-weight: 600;">Chưa có</p>
+                </div>
+                <div class="member-card">
+                    <img src="https://ui-avatars.com/api/?name=Phan+Le+Bao+Ngoc&background=ffb300&color=fff" class="member-img" alt="Member 5">
+                    <h3>Phan Lê Bảo Ngọc</h3>
+                    <p style="color: var(--third); font-weight: 600;">Chưa có</p>
+                </div>
+                <div class="member-card">
+                    <img src="https://ui-avatars.com/api/?name=Truong+Thai+Duy&background=ffb300&color=fff" class="member-img" alt="Member 6">
+                    <h3>Trương Thái Duy</h3>
+                    <p style="color: var(--third); font-weight: 600;">Chưa có</p>
+                </div>
+                <div class="member-card">
+                    <img src="https://ui-avatars.com/api/?name=Tran+Quoc+Cuong&background=ffb300&color=fff" class="member-img" alt="Member 7">
+                    <h3>Trần Quốc Cường</h3>
+                    <p style="color: var(--third); font-weight: 600;">Chưa có</p>
                 </div>
             </div>
         </div>
@@ -390,166 +405,107 @@
         // --- 2. DATA STORAGE ---
         // (Giữ nguyên dữ liệu theo yêu cầu)
         const questions = [
-            { q: "Bạn thích tự tay lắp ráp, sửa chữa đồ đạc?", s: "Kỹ thuật" },
-            { q: "Bạn thích quan sát, phân tích các hiện tượng khoa học?", s: "Nghiên cứu" },
-            { q: "Bạn thích vẽ, viết lách hoặc thiết kế sáng tạo?", s: "Nghệ thuật" },
-            { q: "Bạn thích chăm sóc, giảng dạy hoặc giúp đỡ người khác?", s: "Xã hội" },
-            { q: "Bạn thích thuyết phục người khác hoặc làm lãnh đạo?", s: "Quản lý" },
-            { q: "Bạn thích làm việc với các con số và hồ sơ chi tiết?", s: "Nghiệp vụ" },
-            { q: "Bạn thích vận hành máy móc, thiết bị công nghệ?", s: "Kỹ thuật" },
-            { q: "Bạn thích nghiên cứu dữ liệu, AI hoặc khoa học máy tính?", s: "Nghiên cứu" },
-            { q: "Bạn thích sáng tạo nội dung trên mạng xã hội?", s: "Nghệ thuật" },
-            { q: "Bạn thích làm việc nhóm và hỗ trợ tinh thần người khác?", s: "Xã hội" },
-            { q: "Bạn thích đàm phán, kinh doanh và bán hàng?", s: "Quản lý" },
-            { q: "Bạn thích làm kế toán, thống kê hoặc kiểm soát tài chính?", s: "Nghiệp vụ" },
-            { q: "Bạn thích sửa chữa điện, điện tử hoặc cơ khí?", s: "Kỹ thuật" },
-            { q: "Bạn thích tìm quy luật, làm thí nghiệm hoặc viết báo cáo khoa học?", s: "Nghiên cứu" },
-            { q: "Bạn thích thiết kế giao diện, thời trang hoặc mỹ thuật?", s: "Nghệ thuật" }
-        ];
+                { q: "Bạn thích tự tay lắp ráp, sửa chữa đồ đạc?", s: "Kỹ thuật" },
+                { q: "Bạn thích quan sát, phân tích các hiện tượng khoa học?", s: "Nghiên cứu" },
+                { q: "Bạn thích vẽ, viết lách hoặc thiết kế sáng tạo?", s: "Nghệ thuật" },
+                { q: "Bạn thích chăm sóc, giảng dạy hoặc giúp đỡ người khác?", s: "Xã hội" },
+                { q: "Bạn thích thuyết phục người khác hoặc làm lãnh đạo?", s: "Quản lý" },
+                { q: "Bạn thích làm việc với các con số và hồ sơ chi tiết?", s: "Nghiệp vụ" },
+                { q: "Bạn thích vận hành máy móc, thiết bị công nghệ?", s: "Kỹ thuật" },
+                { q: "Bạn thích nghiên cứu dữ liệu, AI hoặc khoa học máy tính?", s: "Nghiên cứu" },
+                { q: "Bạn thích sáng tạo nội dung trên mạng xã hội?", s: "Nghệ thuật" },
+                { q: "Bạn thích làm việc nhóm và hỗ trợ tinh thần người khác?", s: "Xã hội" },
+                { q: "Bạn thích đàm phán, kinh doanh và bán hàng?", s: "Quản lý" },
+                { q: "Bạn thích làm kế toán, thống kê hoặc kiểm soát tài chính?", s: "Nghiệp vụ" },
+                { q: "Bạn thích sửa chữa điện, điện tử hoặc cơ khí?", s: "Kỹ thuật" },
+                { q: "Bạn thích tìm quy luật, làm thí nghiệm hoặc viết báo cáo khoa học?", s: "Nghiên cứu" },
+                { q: "Bạn thích thiết kế giao diện, thời trang hoặc mỹ thuật?", s: "Nghệ thuật" }
+            ];
 
-        const jobLibrary = {
-            "Kỹ thuật": {
-                name: "Nhóm Kỹ thuật – Thực hành",
-                desc: "Phù hợp với người thích máy móc, công nghệ và làm việc thực tế.",
-                jobs: ["Kỹ sư cơ khí", "Kỹ sư điện – điện tử", "Kỹ thuật viên robot", "Kỹ sư tự động hóa", "Kỹ sư xây dựng", "Kỹ thuật viên ô tô", "Kỹ sư phần cứng", "Thợ cơ điện lạnh", "Kỹ sư năng lượng", "Kỹ thuật viên bảo trì"],
-                steps: ["Học nền tảng Toán – Lý – Công nghệ", "Thực hành lắp ráp, sửa chữa thiết bị", "Học CAD, PLC, Robot hoặc IoT", "Tham gia CLB STEM / kỹ thuật", "Thực tập tại xưởng hoặc công ty kỹ thuật"]
-            },
-            "Nghiên cứu": {
-                name: "Nhóm Nghiên cứu – Phân tích",
-                desc: "Dành cho người yêu khoa học, tư duy logic và khám phá tri thức.",
-                jobs: ["Nhà khoa học dữ liệu", "Nhà nghiên cứu AI", "Nhà vật lý", "Nhà sinh học", "Nhà hóa học", "Lập trình viên AI", "Chuyên gia phân tích dữ liệu", "Nhà nghiên cứu y sinh", "Kỹ sư thuật toán", "Nhà nghiên cứu môi trường"],
-                steps: ["Học chuyên sâu Toán – Tin – Khoa học", "Rèn tư duy logic và phân tích", "Tham gia nghiên cứu khoa học học sinh/sinh viên", "Học Python, Data, AI hoặc thống kê", "Viết báo cáo, công bố nghiên cứu nhỏ"]
-            },
-            "Nghệ thuật": {
-                name: "Nhóm Nghệ thuật – Sáng tạo",
-                desc: "Phù hợp với người giàu cảm xúc, sáng tạo và cá tính.",
-                jobs: ["Nhà thiết kế đồ họa", "Designer UI/UX", "Họa sĩ minh họa", "Nhà làm phim", "Biên kịch", "Nhiếp ảnh gia", "Nhà thiết kế thời trang", "Content Creator", "Game Artist", "Nhà sáng tạo đa phương tiện"],
-                steps: ["Khám phá phong cách cá nhân", "Học công cụ thiết kế (Photoshop, Figma, Blender…)", "Thực hành sáng tạo hằng ngày", "Xây dựng Portfolio cá nhân", "Tham gia dự án, cuộc thi hoặc freelance"]
-            },
-            "Xã hội": {
-                name: "Nhóm Xã hội – Con người",
-                desc: "Dành cho người thích giao tiếp, hỗ trợ và truyền cảm hứng.",
-                jobs: ["Giáo viên", "Giảng viên đại học", "Chuyên viên tâm lý", "Nhân viên công tác xã hội", "Bác sĩ", "Y tá", "Huấn luyện viên kỹ năng", "Tư vấn hướng nghiệp", "Nhân sự HR", "Điều phối viên cộng đồng"],
-                steps: ["Rèn kỹ năng giao tiếp & lắng nghe", "Học tâm lý học – giáo dục – xã hội", "Tham gia hoạt động tình nguyện", "Thực tập trong môi trường cộng đồng", "Phát triển kỹ năng truyền cảm hứng"]
-            },
-            "Quản lý": {
-                name: "Nhóm Quản lý – Kinh doanh",
-                desc: "Phù hợp với người có tố chất lãnh đạo và tư duy chiến lược.",
-                jobs: ["Doanh nhân", "CEO / Founder", "Quản lý dự án", "Giám đốc marketing", "Chuyên viên kinh doanh", "Sales Manager", "Chuyên viên phát triển thị trường", "Quản lý sản phẩm (PM)", "Quản lý startup", "Nhà đầu tư"],
-                steps: ["Rèn kỹ năng lãnh đạo & thuyết trình", "Học kinh tế – quản trị – marketing", "Tham gia dự án nhóm, CLB kinh doanh", "Thử sức bán hàng hoặc khởi nghiệp nhỏ", "Xây dựng tư duy chiến lược dài hạn"]
-            },
-            "Nghiệp vụ": { // Added fallback for consistency if needed, though mostly covered by specific logic
-                name: "Nhóm Nghiệp vụ - Tổ chức",
-                desc: "Thích làm việc với dữ liệu, con số và sự ngăn nắp.",
-                jobs: ["Kế toán", "Kiểm toán", "Thư ký", "Lưu trữ", "Hậu cần"],
-                steps: ["Học kỹ năng văn phòng", "Thực hành Excel/SQL", "Rèn tính cẩn thận"]
+            const jobLibrary = {
+                "Kỹ thuật": { name: "Kỹ thuật & Công nghệ", desc: "Bạn có tư duy logic thực tế, giỏi giải quyết vấn đề bằng công cụ.", steps: ["Học vững Toán - Lý", "Thực hành tại các Lab/Xưởng", "Học các chứng chỉ kỹ thuật chuyên sâu"] },
+                "Nghiên cứu": { name: "Nghiên cứu & Phân tích", desc: "Bạn là người tò mò, thích khám phá bản chất sự vật.", steps: ["Rèn luyện tư duy phản biện", "Học ngoại ngữ để đọc tài liệu quốc tế", "Tham gia các dự án nghiên cứu"] },
+                "Nghệ thuật": { name: "Nghệ thuật & Sáng tạo", desc: "Tâm hồn bạn giàu cảm xúc và luôn có cái nhìn mới mẻ.", steps: ["Xây dựng Portfolio", "Học các công cụ sáng tạo (Adobe, Figma...)", "Tham gia cộng đồng sáng tạo"] },
+                "Xã hội": { name: "Xã hội & Kết nối", desc: "Bạn có chỉ số EQ cao, thích giúp đỡ và lan tỏa giá trị.", steps: ["Rèn kỹ năng giao tiếp", "Hoạt động tình nguyện", "Học về tâm lý con người"] },
+                "Quản lý": { name: "Quản lý & Kinh doanh", desc: "Bạn có tố chất lãnh đạo, quyết đoán và nhạy bén với cơ hội.", steps: ["Học về quản trị và tài chính", "Thực hành lãnh đạo nhóm nhỏ", "Rèn luyện kỹ năng thuyết trình"] },
+                "Nghiệp vụ": { name: "Nghiệp vụ & Tổ chức", desc: "Bạn cẩn thận, ngăn nắp và là 'xương sống' của mọi tổ chức.", steps: ["Thành thạo tin học văn phòng", "Học về quy trình và hệ thống", "Rèn tính tỉ mỉ, chính xác"] }
+            };
+
+            let state = {
+                currentIdx: 0,
+                scores: { "Kỹ thuật": 0, "Nghiên cứu": 0, "Nghệ thuật": 0, "Xã hội": 0, "Quản lý": 0, "Nghiệp vụ": 0 }
+            };
+
+            function renderQuestion() {
+                if (state.currentIdx < questions.length) {
+                    const q = questions[state.currentIdx];
+                    document.getElementById('q-text').innerText = q.q;
+                    document.getElementById('q-counter').innerText = `${state.currentIdx + 1}/${questions.length}`;
+                    document.getElementById('p-fill').style.width = `${(state.currentIdx / questions.length) * 100}%`;
+
+                    const options = [
+                        { t: "Rất thích / Đúng với tôi", v: 2, i: "fa-heart" },
+                        { t: "Bình thường / Có thể", v: 1, i: "fa-check" },
+                        { t: "Không phù hợp", v: 0, i: "fa-times" }
+                    ];
+
+                    document.getElementById('options-container').innerHTML = options.map(opt => 
+                        `<button class="opt-btn" onclick="handleAnswer('${q.s}', ${opt.v})">
+                            <span>${opt.t}</span><i class="fas ${opt.i}"></i>
+                        </button>`
+                    ).join('');
+                } else {
+                    showResult();
+                }
             }
-        };
 
-        // --- 3. STATE MANAGEMENT ---
-        let state = {
-            currentIdx: 0,
-            scores: { "Kỹ thuật": 0, "Nghiên cứu": 0, "Nghệ thuật": 0, "Xã hội": 0, "Quản lý": 0, "Nghiệp vụ": 0 },
-            topResult: null
-        };
-
-        // --- 4. CORE FUNCTIONS ---
-
-        function renderQuestion() {
-            const container = document.getElementById('options-container');
-            const qCounter = document.getElementById('q-counter');
-            const pFill = document.getElementById('p-fill');
-            const qText = document.getElementById('q-text');
-
-            if (state.currentIdx < questions.length) {
-                const q = questions[state.currentIdx];
-                qText.innerText = q.q;
-                
-                // Update Progress UI
-                const progress = ((state.currentIdx) / questions.length) * 100;
-                pFill.style.width = `${progress}%`;
-                qCounter.innerText = `${state.currentIdx + 1}/${questions.length}`;
-                
-                const options = [
-                    { t: "Rất thích / Hoàn toàn đúng", v: 2, i: "fa-heart" },
-                    { t: "Khá thích / Bình thường", v: 1, i: "fa-thumbs-up" },
-                    { t: "Không phù hợp", v: 0, i: "fa-times" }
-                ];
-                
-                container.innerHTML = options.map(opt => 
-                    `<button class="opt-btn" onclick="handleAnswer('${q.s}', ${opt.v})">
-                        <span>${opt.t}</span>
-                        <i class="fas ${opt.i}"></i>
-                    </button>`
-                ).join('');
-            } else {
-                showResult();
-            }
-        }
-
-        window.handleAnswer = (category, value) => {
-            if(state.scores.hasOwnProperty(category)) {
+            window.handleAnswer = (category, value) => {
                 state.scores[category] += value;
+                state.currentIdx++;
+                renderQuestion();
             }
-            state.currentIdx++;
-            renderQuestion();
-        }
 
-        function showResult() {
-            document.getElementById('quiz-interface').style.display = 'none';
-            document.getElementById('result-body').style.display = 'block';
+            function showResult() {
+                document.getElementById('quiz-interface').style.display = 'none';
+                document.getElementById('result-body').style.display = 'block';
 
-            // Find max score
-            let maxScore = -1;
-            let topCat = "";
-            for (const [key, val] of Object.entries(state.scores)) {
-                if (val > maxScore) {
-                    maxScore = val;
-                    topCat = key;
+                // Sắp xếp tìm Top 2 nhóm cao nhất
+                const sorted = Object.entries(state.scores).sort((a, b) => b[1] - a[1]);
+                const top1 = sorted[0][0];
+                const top2 = sorted[1][0];
+
+                // Thuật toán nhận xét thông minh (Hybrid)
+                let aiComment = jobLibrary[top1].desc;
+                if (state.scores[top1] > 0 && state.scores[top2] > 0) {
+                    aiComment += ` Ngoài ra, sự kết hợp với nhóm **${top2}** cho thấy bạn rất đa năng.`;
                 }
+
+                document.getElementById('res-job').innerText = `Nhóm chính: ${jobLibrary[top1].name}`;
+                document.getElementById('res-desc').innerHTML = aiComment;
+                document.getElementById('res-roadmap').innerHTML = jobLibrary[top1].steps.map(s => `<li>${s}</li>`).join('');
+
+                renderResultChart();
             }
-            state.topResult = topCat;
 
-            const jobData = jobLibrary[topCat] || jobLibrary["Nghiệp vụ"]; // Fallback safety
-
-            document.getElementById('res-job').innerText = jobData.name;
-            document.getElementById('res-desc').innerText = jobData.desc;
-            document.getElementById('res-roadmap').innerHTML = jobData.steps.map(s => `<li>${s}</li>`).join('');
-
-            renderResultChart();
-            setupFirebaseSave(topCat);
-        }
-
-        function renderResultChart() {
-            const ctx = document.getElementById('resultChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: Object.keys(state.scores),
-                    datasets: [{
-                        label: 'Mức độ phù hợp',
-                        data: Object.values(state.scores),
-                        backgroundColor: 'rgba(30, 136, 229, 0.2)',
-                        borderColor: '#1e88e5',
-                        pointBackgroundColor: '#fff',
-                        pointBorderColor: '#1e88e5',
-                        pointHoverBackgroundColor: '#1e88e5',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    scales: {
-                        r: {
-                            angleLines: { color: '#e2e8f0' },
-                            grid: { color: '#e2e8f0' },
-                            suggestedMin: 0,
-                            suggestedMax: 10
-                        }
+            function renderResultChart() {
+                const ctx = document.getElementById('resultChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: Object.keys(state.scores),
+                        datasets: [{
+                            label: 'Điểm tố chất',
+                            data: Object.values(state.scores),
+                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                            borderColor: '#2563eb',
+                            pointBackgroundColor: '#2563eb'
+                        }]
                     },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
+                    options: { scales: { r: { beginAtZero: true, max: 6 } }, plugins: { legend: { display: false } } }
+                });
+            }
+
+            renderQuestion();
 
         function setupFirebaseSave(topCat) {
             const btn = document.getElementById('save-firebase');
