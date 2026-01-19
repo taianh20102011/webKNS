@@ -276,7 +276,7 @@
                     <h3>Trần Quốc Cường</h3>
                     <p style="color: #000; font-weight: 600;">Chưa có</p>
                 </div>
-                
+
                 <div class="member-card">
                     <img src="https://ui-avatars.com/api/?name=Pham+Ngoc+Tai+Anh&background=000000&color=fff" class="member-img" alt="Member 2">
                     <h3>Phạm Ngọc Tài Anh</h3>
@@ -474,23 +474,76 @@
                 document.getElementById('quiz-interface').style.display = 'none';
                 document.getElementById('result-body').style.display = 'block';
 
-                // Sắp xếp tìm Top 2 nhóm cao nhất
-                const sorted = Object.entries(state.scores).sort((a, b) => b[1] - a[1]);
-                const top1 = sorted[0][0];
-                const top2 = sorted[1][0];
+                const totalQuestions = questions.length;
 
-                // Thuật toán nhận xét thông minh (Hybrid)
-                let aiComment = jobLibrary[top1].desc;
-                if (state.scores[top1] > 0 && state.scores[top2] > 0) {
-                    aiComment += ` Ngoài ra, sự kết hợp với nhóm **${top2}** cho thấy bạn rất đa năng.`;
+                // 1️⃣ Chuẩn hóa điểm (0 → 1)
+                const normalizedScores = {};
+                for (let k in state.scores) {
+                    normalizedScores[k] = state.scores[k] / (2 * totalQuestions);
                 }
 
-                document.getElementById('res-job').innerText = `Nhóm chính: ${jobLibrary[top1].name}`;
-                document.getElementById('res-desc').innerHTML = aiComment;
-                document.getElementById('res-roadmap').innerHTML = jobLibrary[top1].steps.map(s => `<li>${s}</li>`).join('');
+                // 2️⃣ Sắp xếp
+                const sorted = Object.entries(normalizedScores)
+                    .sort((a, b) => b[1] - a[1]);
+
+                const [top1, score1] = sorted[0];
+                const [top2, score2] = sorted[1];
+                const [top3, score3] = sorted[2];
+
+                // 3️⃣ Độ chắc chắn
+                const confidence = Math.round(score1 * 100);
+
+                // 4️⃣ Phân loại hồ sơ
+                let profileType = "Định hướng rõ";
+                if (score1 - score2 < 0.05) profileType = "Đa năng – linh hoạt";
+                if (score1 < 0.35) profileType = "Đang khám phá bản thân";
+
+                // 5️⃣ AI nhận xét thông minh
+                let aiComment = `
+                    <b>${jobLibrary[top1].name}</b> là nhóm phù hợp nhất với bạn hiện tại.<br><br>
+                    ${jobLibrary[top1].desc}
+                `;
+
+                if (score2 > 0.3) {
+                    aiComment += `
+                        <br><br>
+                        🔹 <b>Tố chất kết hợp:</b> Bạn còn mang màu sắc của <b>${jobLibrary[top2].name}</b>,
+                        cho thấy khả năng thích nghi và phát triển đa lĩnh vực.
+                    `;
+                }
+
+                if (profileType === "Đa năng – linh hoạt") {
+                    aiComment += `
+                        <br><br>
+                        ⚡ <i>Bạn không nên bó mình vào một nghề cố định sớm – hãy chọn môi trường cho phép thử nghiệm.</i>
+                    `;
+                }
+
+                if (profileType === "Đang khám phá bản thân") {
+                    aiComment += `
+                        <br><br>
+                        🌱 <i>Kết quả cho thấy bạn đang trong giai đoạn khám phá. Trải nghiệm thực tế sẽ quan trọng hơn điểm số.</i>
+                    `;
+                }
+
+                // 6️⃣ Render UI
+                document.getElementById('res-job').innerHTML =
+                    `Nhóm chính: <b>${jobLibrary[top1].name}</b>`;
+
+                document.getElementById('res-desc').innerHTML = `
+                    ${aiComment}
+                    <br><br>
+                    🎯 <b>Độ phù hợp ước tính:</b> ${confidence}%
+                    <br>
+                    🧠 <b>Kiểu hồ sơ:</b> ${profileType}
+                `;
+
+                document.getElementById('res-roadmap').innerHTML =
+                    jobLibrary[top1].steps.map(s => `<li>${s}</li>`).join('');
 
                 renderResultChart();
             }
+
 
             function renderResultChart() {
                 const ctx = document.getElementById('resultChart').getContext('2d');
@@ -499,18 +552,25 @@
                     data: {
                         labels: Object.keys(state.scores),
                         datasets: [{
-                            label: 'Điểm tố chất',
+                            label: 'Tố chất cá nhân',
                             data: Object.values(state.scores),
-                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
-                            borderColor: '#2563eb',
-                            pointBackgroundColor: '#2563eb'
+                            backgroundColor: 'rgba(59,130,246,0.25)',
+                            borderColor: '#3b82f6',
+                            pointBackgroundColor: '#2563eb',
+                            borderWidth: 2
                         }]
                     },
-                    options: { scales: { r: { beginAtZero: true, max: 6 } }, plugins: { legend: { display: false } } }
+                    options: {
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                ticks: { stepSize: 1 }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
                 });
             }
-
-            renderQuestion();
 
         function setupFirebaseSave(topCat) {
             const btn = document.getElementById('save-firebase');
